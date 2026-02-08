@@ -534,7 +534,7 @@ DELETE http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440003
 
 ---
 
-# 3️⃣ WIDGET ENDPOINTS
+# 3️. WIDGET ENDPOINTS
 
 ## 3.1 POST /pages/:id/widgets - Create Widget
 
@@ -1131,53 +1131,7 @@ Content-Type: application/json
 
 ---
 
-# 🧪 INTEGRATION TEST SCENARIOS
-
-## Scenario 1: Complete Flow - Build a Page
-
-```
-1. POST /pages → Create "Home" page (is_home=true)
-2. POST /pages/[HOME_ID]/widgets → Add banner widget
-3. POST /pages/[HOME_ID]/widgets → Add product_grid widget
-4. POST /pages/[HOME_ID]/widgets → Add spacer widget
-5. GET /pages/[HOME_ID] → Verify all widgets
-6. POST /pages/[HOME_ID]/widgets/reorder → Reorder widgets
-7. GET /pages/[HOME_ID] → Verify new order
-8. PUT /widgets/[WIDGET_ID] → Update widget config
-9. GET /pages/[HOME_ID] → Verify update
-10. DELETE /widgets/[WIDGET_ID] → Remove spacer
-11. GET /pages/[HOME_ID] → Verify deletion
-12. DELETE /pages/[HOME_ID] → Try to delete (should fail - is_home=true)
-```
-
-## Scenario 2: Multiple Pages
-
-```
-1. POST /pages → Create "Home" (is_home=true)
-2. POST /pages → Create "Collection" (is_home=false)
-3. POST /pages → Create "Product" (is_home=false)
-4. GET /pages → Verify 3 pages listed
-5. POST /pages/[PRODUCT_ID]/widgets → Add widget to Product page
-6. DELETE /pages/[COLLECTION_ID] → Delete Collection (non-home)
-7. GET /pages → Verify only 2 pages remain
-8. PUT /pages/[PRODUCT_ID] → Set is_home=true
-9. GET /pages → Verify Home page is_home=false now
-```
-
-## Scenario 3: Error Handling
-
-```
-1. POST /pages → Create page without name (should fail)
-2. POST /pages → Create page with duplicate route (should fail)
-3. POST /pages/[ID]/widgets → Create widget with invalid type (should fail)
-4. GET /pages/[INVALID_ID] → Get non-existent page (should fail)
-5. PUT /widgets/[INVALID_ID] → Update non-existent widget (should fail)
-6. DELETE /pages/[HOME_ID] → Try delete home page (should fail)
-```
-
----
-
-# 📊 EXPECTED STATUS CODES SUMMARY
+# EXPECTED STATUS CODES SUMMARY
 
 | Operation | Success | Validation Error | Not Found | Conflict |
 |-----------|---------|------------------|-----------|----------|
@@ -1190,57 +1144,3 @@ Content-Type: application/json
 | PUT /widgets/:id | 200 | 400 | 404 | - |
 | DELETE /widgets/:id | 200 | - | 404 | - |
 | POST /pages/:id/widgets/reorder | 200 | 400 | 404 | - |
-
----
-
-# 🔧 POSTMAN COLLECTION SETUP
-
-### Headers for All Requests
-```
-Content-Type: application/json
-```
-
-### Environment Variables (Optional)
-```
-{{base_url}} = http://localhost:8080
-{{page_id}} = [store page IDs from responses]
-{{widget_id}} = [store widget IDs from responses]
-```
-
-### Then Use:
-```
-GET {{base_url}}/pages/{{page_id}}
-```
-
----
-
-# ✅ TESTING CHECKLIST
-
-- [ ] Health check works
-- [ ] Create page (valid)
-- [ ] Create page (missing fields)
-- [ ] Create page (duplicate route)
-- [ ] Create second home page (first becomes non-home)
-- [ ] Get all pages (empty and with data)
-- [ ] Get single page with widgets
-- [ ] Get non-existent page
-- [ ] Update page (name, route, is_home)
-- [ ] Update to duplicate route (should fail)
-- [ ] Update non-existent page
-- [ ] Delete page (non-home)
-- [ ] Delete home page (should fail)
-- [ ] Delete cascades widgets
-- [ ] Create widget (all types)
-- [ ] Create widget (no config)
-- [ ] Create widget (invalid type)
-- [ ] Create widget (non-existent page)
-- [ ] Update widget (type, config, position)
-- [ ] Update non-existent widget
-- [ ] Delete widget
-- [ ] Reorder widgets
-- [ ] Reorder non-existent page
-- [ ] Reorder non-existent widget
-- [ ] Reorder widget from different page
-- [ ] All error responses follow correct format
-- [ ] All error responses use correct status codes
-
