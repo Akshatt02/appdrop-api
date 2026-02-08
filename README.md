@@ -76,10 +76,6 @@ Expected output: `go version go1.25.X ...`
 Create a `.env` file in the project root:
 
 ```bash
-# For local PostgreSQL
-DATABASE_URL="postgres://username:password@localhost:5432/appdrop_db"
-PORT=8080
-
 # For Neon PostgreSQL
 DATABASE_URL="postgresql://user:password@ep-xxxxx.region.postgres.vercel.sh/dbname?sslmode=require"
 PORT=8080
@@ -343,14 +339,10 @@ func GetPageByID(id string) (*models.Page, error) {
 ## Environment Variables Reference
 
 ```env
-# Database connection string (required)
-DATABASE_URL=postgresql://user:password@host:5432/dbname
-
-# Server port (required)
 PORT=8080
 
 # Example for Neon PostgreSQL
-# DATABASE_URL=postgresql://user:password@ep-xxxxx.region.postgres.vercel.sh/dbname?sslmode=require
+DATABASE_URL=postgresql://user:password@ep-xxxxx.region.postgres.vercel.sh/dbname?sslmode=require
 ```
 
 ---
