@@ -261,7 +261,6 @@ appdrop-api/
 ├── go.mod                           # Go module definition
 ├── go.sum                           # Dependency checksums
 ├── .env                             # Environment variables (local)
-├── .env.example                     # Example environment file
 ├── README.md                        # This file
 ├── POSTMAN_TESTING_GUIDE.md         # Complete API testing documentation
 │
