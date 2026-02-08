@@ -1,33 +1,33 @@
-# 🚀 AppDrop API - Postman Testing Guide
+# AppDrop API - Postman Testing Guide
 
 ## Base URL
 ```
-http://localhost:5000
+http://localhost:8080
 ```
 
 ---
 
-# 1️⃣ HEALTH CHECK
+# 1. HEALTH CHECK
 
 ### Test 1.1: Health Check
 ```
-GET http://localhost:5000/health
+GET http://localhost:8080/health
 ```
 
 **Expected Response:** `200 OK`
 ```
-API + DB working 🚀
+API + DB working
 ```
 
 ---
 
-# 2️⃣ PAGE ENDPOINTS
+# 2. PAGE ENDPOINTS
 
 ## 2.1 GET /pages - List All Pages
 
 ### Test 2.1.1: Get Pages (Empty Database)
 ```
-GET http://localhost:5000/pages
+GET http://localhost:8080/pages
 ```
 
 **Expected Response:** `200 OK`
@@ -37,7 +37,7 @@ GET http://localhost:5000/pages
 
 ### Test 2.1.2: Get Pages (With Data)
 ```
-GET http://localhost:5000/pages
+GET http://localhost:8080/pages
 ```
 
 **Expected Response:** `200 OK`
@@ -68,7 +68,7 @@ GET http://localhost:5000/pages
 
 ### Test 2.2.1: Create Page (Valid)
 ```
-POST http://localhost:5000/pages
+POST http://localhost:8080/pages
 Content-Type: application/json
 ```
 
@@ -95,7 +95,7 @@ Content-Type: application/json
 
 ### Test 2.2.2: Create Page (Missing Name)
 ```
-POST http://localhost:5000/pages
+POST http://localhost:8080/pages
 Content-Type: application/json
 ```
 
@@ -119,7 +119,7 @@ Content-Type: application/json
 
 ### Test 2.2.3: Create Page (Missing Route)
 ```
-POST http://localhost:5000/pages
+POST http://localhost:8080/pages
 Content-Type: application/json
 ```
 
@@ -143,7 +143,7 @@ Content-Type: application/json
 
 ### Test 2.2.4: Create Page (Duplicate Route)
 ```
-POST http://localhost:5000/pages
+POST http://localhost:8080/pages
 Content-Type: application/json
 ```
 
@@ -168,7 +168,7 @@ Content-Type: application/json
 
 ### Test 2.2.5: Create Page (Invalid JSON)
 ```
-POST http://localhost:5000/pages
+POST http://localhost:8080/pages
 Content-Type: application/json
 ```
 
@@ -189,7 +189,7 @@ Content-Type: application/json
 
 ### Test 2.2.6: Create Second Home Page (Replaces First)
 ```
-POST http://localhost:5000/pages
+POST http://localhost:8080/pages
 Content-Type: application/json
 ```
 
@@ -220,7 +220,7 @@ Content-Type: application/json
 
 ### Test 2.3.1: Get Page with Widgets
 ```
-GET http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000
+GET http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000
 ```
 
 **Expected Response:** `200 OK`
@@ -253,7 +253,7 @@ GET http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000
 
 ### Test 2.3.2: Get Page Without Widgets
 ```
-GET http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440002
+GET http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440002
 ```
 
 **Expected Response:** `200 OK`
@@ -273,7 +273,7 @@ GET http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440002
 
 ### Test 2.3.3: Get Non-existent Page
 ```
-GET http://localhost:5000/pages/00000000-0000-0000-0000-000000000000
+GET http://localhost:8080/pages/00000000-0000-0000-0000-000000000000
 ```
 
 **Expected Response:** `404 Not Found`
@@ -292,7 +292,7 @@ GET http://localhost:5000/pages/00000000-0000-0000-0000-000000000000
 
 ### Test 2.4.1: Update Page (Change Name)
 ```
-PUT http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000
+PUT http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000
 Content-Type: application/json
 ```
 
@@ -319,7 +319,7 @@ Content-Type: application/json
 
 ### Test 2.4.2: Update Page (Change Route)
 ```
-PUT http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440001
+PUT http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440001
 Content-Type: application/json
 ```
 
@@ -346,7 +346,7 @@ Content-Type: application/json
 
 ### Test 2.4.3: Update Page (Duplicate Route for Different Page)
 ```
-PUT http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440001
+PUT http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440001
 Content-Type: application/json
 ```
 
@@ -371,7 +371,7 @@ Content-Type: application/json
 
 ### Test 2.4.4: Update Page (Keep Same Route)
 ```
-PUT http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440001
+PUT http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440001
 Content-Type: application/json
 ```
 
@@ -398,7 +398,7 @@ Content-Type: application/json
 
 ### Test 2.4.5: Update Page (Set is_home to true)
 ```
-PUT http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440001
+PUT http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440001
 Content-Type: application/json
 ```
 
@@ -425,7 +425,7 @@ Content-Type: application/json
 
 ### Test 2.4.6: Update Non-existent Page
 ```
-PUT http://localhost:5000/pages/00000000-0000-0000-0000-000000000000
+PUT http://localhost:8080/pages/00000000-0000-0000-0000-000000000000
 Content-Type: application/json
 ```
 
@@ -450,7 +450,7 @@ Content-Type: application/json
 
 ### Test 2.4.7: Update Page (Missing Required Fields)
 ```
-PUT http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000
+PUT http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000
 Content-Type: application/json
 ```
 
@@ -479,7 +479,7 @@ Content-Type: application/json
 
 ### Test 2.5.1: Delete Non-Home Page
 ```
-DELETE http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440001
+DELETE http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440001
 ```
 
 **Expected Response:** `200 OK`
@@ -491,7 +491,7 @@ DELETE http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440001
 
 ### Test 2.5.2: Delete Home Page (Should Fail)
 ```
-DELETE http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000
+DELETE http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000
 ```
 
 **Expected Response:** `409 Conflict`
@@ -506,7 +506,7 @@ DELETE http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000
 
 ### Test 2.5.3: Delete Non-existent Page
 ```
-DELETE http://localhost:5000/pages/00000000-0000-0000-0000-000000000000
+DELETE http://localhost:8080/pages/00000000-0000-0000-0000-000000000000
 ```
 
 **Expected Response:** `404 Not Found`
@@ -522,7 +522,7 @@ DELETE http://localhost:5000/pages/00000000-0000-0000-0000-000000000000
 ### Test 2.5.4: Delete Page (Cascades Widgets)
 **Setup:** Create a page with widgets, then delete the page
 ```
-DELETE http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440003
+DELETE http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440003
 ```
 
 **Expected Response:** `200 OK` (All widgets are deleted automatically)
@@ -540,7 +540,7 @@ DELETE http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440003
 
 ### Test 3.1.1: Create Widget (Banner with Config)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets
 Content-Type: application/json
 ```
 
@@ -576,7 +576,7 @@ Content-Type: application/json
 
 ### Test 3.1.2: Create Widget (Product Grid)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets
 Content-Type: application/json
 ```
 
@@ -610,7 +610,7 @@ Content-Type: application/json
 
 ### Test 3.1.3: Create Widget (Text)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets
 Content-Type: application/json
 ```
 
@@ -631,7 +631,7 @@ Content-Type: application/json
 
 ### Test 3.1.4: Create Widget (Image)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets
 Content-Type: application/json
 ```
 
@@ -652,7 +652,7 @@ Content-Type: application/json
 
 ### Test 3.1.5: Create Widget (Spacer)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets
 Content-Type: application/json
 ```
 
@@ -671,7 +671,7 @@ Content-Type: application/json
 
 ### Test 3.1.6: Create Widget (No Config - Allowed)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets
 Content-Type: application/json
 ```
 
@@ -687,7 +687,7 @@ Content-Type: application/json
 
 ### Test 3.1.7: Create Widget (Invalid Type)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets
 Content-Type: application/json
 ```
 
@@ -712,7 +712,7 @@ Content-Type: application/json
 
 ### Test 3.1.8: Create Widget (Non-existent Page)
 ```
-POST http://localhost:5000/pages/00000000-0000-0000-0000-000000000000/widgets
+POST http://localhost:8080/pages/00000000-0000-0000-0000-000000000000/widgets
 Content-Type: application/json
 ```
 
@@ -737,7 +737,7 @@ Content-Type: application/json
 
 ### Test 3.1.9: Create Widget (Invalid JSON)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets
 Content-Type: application/json
 ```
 
@@ -762,7 +762,7 @@ Content-Type: application/json
 
 ### Test 3.2.1: Update Widget (Change Type)
 ```
-PUT http://localhost:5000/widgets/660e8400-e29b-41d4-a716-446655440000
+PUT http://localhost:8080/widgets/660e8400-e29b-41d4-a716-446655440000
 Content-Type: application/json
 ```
 
@@ -794,7 +794,7 @@ Content-Type: application/json
 
 ### Test 3.2.2: Update Widget (Change Config)
 ```
-PUT http://localhost:5000/widgets/660e8400-e29b-41d4-a716-446655440001
+PUT http://localhost:8080/widgets/660e8400-e29b-41d4-a716-446655440001
 Content-Type: application/json
 ```
 
@@ -814,7 +814,7 @@ Content-Type: application/json
 
 ### Test 3.2.3: Update Widget (Change Position)
 ```
-PUT http://localhost:5000/widgets/660e8400-e29b-41d4-a716-446655440000
+PUT http://localhost:8080/widgets/660e8400-e29b-41d4-a716-446655440000
 Content-Type: application/json
 ```
 
@@ -834,7 +834,7 @@ Content-Type: application/json
 
 ### Test 3.2.4: Update Widget (Invalid Type)
 ```
-PUT http://localhost:5000/widgets/660e8400-e29b-41d4-a716-446655440000
+PUT http://localhost:8080/widgets/660e8400-e29b-41d4-a716-446655440000
 Content-Type: application/json
 ```
 
@@ -859,7 +859,7 @@ Content-Type: application/json
 
 ### Test 3.2.5: Update Non-existent Widget
 ```
-PUT http://localhost:5000/widgets/00000000-0000-0000-0000-000000000000
+PUT http://localhost:8080/widgets/00000000-0000-0000-0000-000000000000
 Content-Type: application/json
 ```
 
@@ -884,7 +884,7 @@ Content-Type: application/json
 
 ### Test 3.2.6: Update Widget (Invalid JSON)
 ```
-PUT http://localhost:5000/widgets/660e8400-e29b-41d4-a716-446655440000
+PUT http://localhost:8080/widgets/660e8400-e29b-41d4-a716-446655440000
 Content-Type: application/json
 ```
 
@@ -909,7 +909,7 @@ Content-Type: application/json
 
 ### Test 3.3.1: Delete Widget
 ```
-DELETE http://localhost:5000/widgets/660e8400-e29b-41d4-a716-446655440000
+DELETE http://localhost:8080/widgets/660e8400-e29b-41d4-a716-446655440000
 ```
 
 **Expected Response:** `200 OK`
@@ -921,7 +921,7 @@ DELETE http://localhost:5000/widgets/660e8400-e29b-41d4-a716-446655440000
 
 ### Test 3.3.2: Delete Non-existent Widget
 ```
-DELETE http://localhost:5000/widgets/00000000-0000-0000-0000-000000000000
+DELETE http://localhost:8080/widgets/00000000-0000-0000-0000-000000000000
 ```
 
 **Expected Response:** `404 Not Found`
@@ -941,7 +941,7 @@ DELETE http://localhost:5000/widgets/00000000-0000-0000-0000-000000000000
 ### Test 3.4.1: Reorder Widgets
 **Setup:** Create 3 widgets with positions 0, 1, 2
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
 Content-Type: application/json
 ```
 
@@ -965,7 +965,7 @@ Content-Type: application/json
 
 **Verify with GET /pages/:id:**
 ```
-GET http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000
+GET http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000
 ```
 
 Response should show widgets ordered by new positions:
@@ -994,7 +994,7 @@ Response should show widgets ordered by new positions:
 
 ### Test 3.4.2: Reorder Widgets (Non-existent Page)
 ```
-POST http://localhost:5000/pages/00000000-0000-0000-0000-000000000000/widgets/reorder
+POST http://localhost:8080/pages/00000000-0000-0000-0000-000000000000/widgets/reorder
 Content-Type: application/json
 ```
 
@@ -1017,7 +1017,7 @@ Content-Type: application/json
 
 ### Test 3.4.3: Reorder Widgets (Non-existent Widget)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
 Content-Type: application/json
 ```
 
@@ -1044,7 +1044,7 @@ Content-Type: application/json
 ### Test 3.4.4: Reorder Widgets (Widget from Different Page)
 **Setup:** Widget exists but belongs to different page
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
 Content-Type: application/json
 ```
 
@@ -1070,7 +1070,7 @@ Content-Type: application/json
 
 ### Test 3.4.5: Reorder Widgets (Invalid JSON)
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
 Content-Type: application/json
 ```
 
@@ -1091,7 +1091,7 @@ Content-Type: application/json
 
 ### Test 3.4.6: Reorder Single Widget
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
 Content-Type: application/json
 ```
 
@@ -1111,7 +1111,7 @@ Content-Type: application/json
 
 ### Test 3.4.7: Reorder Empty Widget List
 ```
-POST http://localhost:5000/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
+POST http://localhost:8080/pages/550e8400-e29b-41d4-a716-446655440000/widgets/reorder
 Content-Type: application/json
 ```
 
@@ -1202,7 +1202,7 @@ Content-Type: application/json
 
 ### Environment Variables (Optional)
 ```
-{{base_url}} = http://localhost:5000
+{{base_url}} = http://localhost:8080
 {{page_id}} = [store page IDs from responses]
 {{widget_id}} = [store widget IDs from responses]
 ```

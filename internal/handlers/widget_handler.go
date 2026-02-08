@@ -9,6 +9,11 @@ import (
 	"appdrop-api/internal/utils"
 )
 
+// CreateWidgetHandler handles POST /pages/:id/widgets requests.
+// Creates a new widget on the specified page.
+// Parses pageID from URL path and validates widget type and configuration.
+// Returns the created widget with its UUID and assigned position.
+// Status: 201 Created on success, 404 if page not found, 400 for validation errors
 func CreateWidgetHandler(w http.ResponseWriter, r *http.Request) {
 	pageID := r.URL.Path[len("/pages/"):]
 	pageID = pageID[:len(pageID)-len("/widgets")]
@@ -35,6 +40,11 @@ func CreateWidgetHandler(w http.ResponseWriter, r *http.Request) {
 	utils.SendJSON(w, 201, createdWidget)
 }
 
+// UpdateWidgetHandler handles PUT /widgets/:id requests.
+// Updates widget configuration, type, or position within its page.
+// Validates widget existence and type constraints.
+// Returns the updated widget.
+// Status: 200 OK on success, 404 if widget not found, 400 for validation errors
 func UpdateWidgetHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Path[len("/widgets/"):]
 
@@ -59,6 +69,9 @@ func UpdateWidgetHandler(w http.ResponseWriter, r *http.Request) {
 	utils.SendJSON(w, 200, updatedWidget)
 }
 
+// DeleteWidgetHandler handles DELETE /widgets/:id requests.
+// Removes a widget from its page by UUID.
+// Status: 200 OK on success, 404 if widget not found
 func DeleteWidgetHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Path[len("/widgets/"):]
 
@@ -75,6 +88,11 @@ func DeleteWidgetHandler(w http.ResponseWriter, r *http.Request) {
 	utils.SendJSON(w, 200, map[string]string{"message": "Widget deleted"})
 }
 
+// ReorderWidgetsHandler handles POST /pages/:id/widgets/reorder requests.
+// Updates the position of all widgets on a page based on provided widget_ids array.
+// The order of widget_ids in the request determines their new positions.
+// Validates that all widgets belong to the specified page.
+// Status: 200 OK on success, 404 if page or widget not found, 400 for validation errors
 func ReorderWidgetsHandler(w http.ResponseWriter, r *http.Request) {
 	pageID := r.URL.Path[len("/pages/"):]
 	pageID = pageID[:len(pageID)-len("/widgets/reorder")]

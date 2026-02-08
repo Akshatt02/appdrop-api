@@ -1,3 +1,6 @@
+// Package repository provides data access operations for the AppDrop API.
+// This layer handles all direct database interactions using parameterized queries.
+// Repository functions use raw SQL with pgx for efficient database operations.
 package repository
 
 import (
@@ -6,6 +9,8 @@ import (
 	"context"
 )
 
+// GetAllPages retrieves all pages from the database.
+// Returns a slice of all pages ordered by creation date, or error on database failure.
 func GetAllPages() ([]models.Page, error) {
 	rows, err := db.Pool.Query(context.Background(),
 		`SELECT id, name, route, is_home, created_at, updated_at FROM pages ORDER BY created_at`)
@@ -29,6 +34,8 @@ func GetAllPages() ([]models.Page, error) {
 }
 
 func CreatePage(page models.Page) (*models.Page, error) {
+	// CreatePage inserts a new page into the database and returns the created page.
+	// Uses RETURNING clause to get auto-generated ID and timestamps in one query.
 	var createdPage models.Page
 	err := db.Pool.QueryRow(context.Background(),
 		`INSERT INTO pages (name, route, is_home) VALUES ($1,$2,$3) RETURNING id, name, route, is_home, created_at, updated_at`,
@@ -42,6 +49,8 @@ func CreatePage(page models.Page) (*models.Page, error) {
 }
 
 func RouteExists(route string) (bool, error) {
+	// RouteExists checks if a page with the given route already exists.
+	// Used to enforce route uniqueness constraint.
 	var exists bool
 	err := db.Pool.QueryRow(context.Background(),
 		`SELECT EXISTS(SELECT 1 FROM pages WHERE route=$1)`,
@@ -52,12 +61,16 @@ func RouteExists(route string) (bool, error) {
 }
 
 func ResetHomePage() error {
+	// ResetHomePage sets is_home=false for all pages.
+	// Called before making a different page the home page to maintain the single home page constraint.
 	_, err := db.Pool.Exec(context.Background(),
 		`UPDATE pages SET is_home = false WHERE is_home = true`)
 	return err
 }
 
 func GetPageByID(id string) (*models.Page, error) {
+	// GetPageByID retrieves a page from the database by its UUID.
+	// Returns nil if the page is not found.
 	var p models.Page
 
 	err := db.Pool.QueryRow(context.Background(),
@@ -72,12 +85,15 @@ func GetPageByID(id string) (*models.Page, error) {
 }
 
 func DeletePage(id string) error {
+	// DeletePage removes a page and all associated widgets (due to ON DELETE CASCADE).
 	_, err := db.Pool.Exec(context.Background(),
 		`DELETE FROM pages WHERE id=$1`, id)
 	return err
 }
 
 func UpdatePage(page models.Page) (*models.Page, error) {
+	// UpdatePage modifies page details and returns the updated page.
+	// Uses RETURNING clause to get updated timestamps and values in one query.
 	var updatedPage models.Page
 	err := db.Pool.QueryRow(context.Background(),
 		`UPDATE pages 
@@ -93,6 +109,8 @@ func UpdatePage(page models.Page) (*models.Page, error) {
 }
 
 func RouteExistsForOtherPage(route, id string) (bool, error) {
+	// RouteExistsForOtherPage checks if a route exists on a different page.
+	// Used during update to allow the same page to keep its own route.
 	var exists bool
 	err := db.Pool.QueryRow(context.Background(),
 		`SELECT EXISTS(SELECT 1 FROM pages WHERE route=$1 AND id != $2)`,
